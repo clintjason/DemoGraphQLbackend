@@ -14,6 +14,11 @@
   "author": "Clint Jason",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "sequelize": "^6.31.1",
+    "sqlite3": "^5.1.6"
   }
 }
