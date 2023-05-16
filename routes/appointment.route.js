@@ -4,6 +4,7 @@ const appointmentCtrl = require('../controllers/appointment.ctrl');
 
 router.post('/new', appointmentCtrl.createAppointment);
 router.get('/', appointmentCtrl.getAllAppointments);
+router.get('/:id', appointmentCtrl.getAppointment);
 router.put('/edit/:id', appointmentCtrl.editAppointment);
 router.delete('/delete/:id', appointmentCtrl.deleteAppointment);
 

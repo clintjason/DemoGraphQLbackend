@@ -38,6 +38,22 @@ exports.getAllAppointments = async (req, res) => {
 }
 
 /**
+  * Get an Appointment.
+  * @param {*} req request object
+  * @param {*} res response object
+  * @returns {*} returns an error message with status code 500 and an error object 
+  *    {error: [String|Object]} or a response  object of the appointment requested  with status code 200
+  * */
+exports.getAppointment = async (req, res) => {
+  try {
+    const appointment = await Appointments.findOne({where: {id: req.params.id}});
+    return res.status(200).json(appointment);
+  } catch (error) {
+		return res.status(500).json({ error: error ? error : new Error('Could not get your data') })
+  }
+}
+
+/**
   * Delete an Appointment.
   * @param {*} req request object
   * @param {*} res response object
