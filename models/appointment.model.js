@@ -13,12 +13,16 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: true
       },
+      age: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       sex: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       phone: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       email: {
@@ -52,10 +56,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       },
       before_appointment: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
       },
       after_appointment: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
       },
 		},
 		{timestamps:true}

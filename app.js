@@ -18,6 +18,6 @@ app.use(express.urlencoded({ extended: true }))
 
 db.sequelize.sync().then(()=> console.log('DB is ready'));
 
-app.use('/api/appointment', appointmentRoutes);
+app.use('/api/appointments', appointmentRoutes);
 
 module.exports = app;
