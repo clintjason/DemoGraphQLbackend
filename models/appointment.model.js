@@ -6,7 +6,6 @@ module.exports = (sequelize, DataTypes) => {
       unique_code: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
       },
       name: {
         type: DataTypes.STRING,
