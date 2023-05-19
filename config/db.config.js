@@ -1,8 +1,8 @@
 module.exports = {
-	HOST: process.env.HOST,
-	USER: process.env.USER,
-	PASSWORD: process.env.PASSWORD,
-	DB: process.env.DB,
+	HOST: "db4free.net",
+	USER: "drng_user",
+	PASSWORD: "l@UoI;XM2",
+	DB: "drng_db",
 	dialect: "mysql",
 	
 	pool: {
