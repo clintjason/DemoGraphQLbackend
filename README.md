@@ -1,10 +1,10 @@
-# DrNG - Patient's Appointments CMS#
+# DrNG - Patient's Appointments CMS #
 
 The aim of this project is to develop a Backend API services to interact with frontend website based on ReactJS, Redux and AntDesgin to interact.
 This demonstrates the ability to create API services for any  utilization.
 
 ### Installation ###
-Perform the followtin instructions:
+Perform the following instructions:
 npm install
 npm run start or npm run dev
 
