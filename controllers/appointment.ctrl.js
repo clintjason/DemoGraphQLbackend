@@ -1,4 +1,5 @@
 const db = require('../models');
+const Op = db.Sequelize.Op;
 const Appointments = db.appointments;
 
 /**
@@ -47,6 +48,52 @@ exports.getAllAppointments = async (req, res) => {
 exports.getAppointment = async (req, res) => {
   try {
     const appointment = await Appointments.findOne({where: {id: req.params.id}});
+    return res.status(200).json(appointment);
+  } catch (error) {
+		return res.status(500).json({ error: error ? error : new Error('Could not get your data') })
+  }
+}
+
+/**
+  * Search through the Appointment Dataset
+  * @param {*} req request object
+  * @param {*} res response object
+  * @returns {*} returns an error message with status code 500 and an error object 
+  *    {error: [String|Object]} or a response  object of the appointment requested  with status code 200
+  * */
+exports.searchInAppointments = async (req, res) => {
+  try {
+    const {name, phone, address, sex, age} = req.query;
+    const appointment = await Appointments.findAll({where:  {
+      [Op.or]: [{
+              name: {
+                  [Op.like]: `%${name}%`
+              }
+          },
+          {
+              phone: {
+                  [Op.like]: `%${phone}%`
+              }
+          },
+          {
+              address: {
+                  [Op.like]: `%${address}%`
+              }
+          },
+          {
+              sex: {
+                  [Op.like]: `%${sex}%`
+              }
+          },
+          {
+              age: {
+                  [Op.like]: `%${age}%`
+              }
+          },
+        ]
+      }
+    });
+    console.log(appointment);
     return res.status(200).json(appointment);
   } catch (error) {
 		return res.status(500).json({ error: error ? error : new Error('Could not get your data') })
