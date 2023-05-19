@@ -31,7 +31,7 @@ exports.createAppointment = async (req, res, next) => {
   * */
 exports.getAllAppointments = async (req, res) => {
   try {
-    const appointments = await Appointments.findAll();
+    const appointments = await Appointments.findAll({order: [['createdAt', 'DESC']]});
     return res.status(200).json(appointments);
   } catch (error) {
 		return res.status(500).json({ error: error ? error : new Error('Could not get your data') })
@@ -64,7 +64,9 @@ exports.getAppointment = async (req, res) => {
 exports.searchInAppointments = async (req, res) => {
   try {
     const {name, phone, address, sex, age} = req.query;
-    const appointment = await Appointments.findAll({where:  {
+    const appointment = await Appointments.findAll({
+      order: [['createdAt', 'DESC']],
+      where:  {
       [Op.or]: [{
               name: {
                   [Op.like]: `%${name}%`

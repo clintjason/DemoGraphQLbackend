@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-
+require('dotenv').config();
 const appointmentRoutes = require('./routes/appointment.route.js');
 
 const app = express();
