@@ -1,8 +1,8 @@
 module.exports = {
 	HOST: "db4free.net",
-	USER: "drng_user",
+	USER: "user_product",
 	PASSWORD: "l@UoI;XM2",
-	DB: "drng_db",
+	DB: "demo_product_db",
 	dialect: "mysql",
 	
 	pool: {

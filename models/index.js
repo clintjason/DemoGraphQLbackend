@@ -5,7 +5,7 @@ const dbConfig = require("../config/db.config");
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
-  dialect: dbConfig.dialect,
+  dialect: 'mysql',
 
   pool: {
     max: dbConfig.pool.max,
@@ -19,6 +19,6 @@ const db = {}
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.appointments = require('./appointment.model.js')(sequelize, Sequelize);
+db.Product = require('./product.model.js')(sequelize, Sequelize);
 
 module.exports = db;

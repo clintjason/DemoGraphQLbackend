@@ -1,53 +1,53 @@
 const db = require('../models');
 const Op = db.Sequelize.Op;
-const Appointments = db.appointments;
+const Products = db.products;
 
 /**
-  * Create an Appointment.
+  * Create an Product.
   * @param {*} req request object
   * @param {*} res response object
   * @returns {*} returns an error message with status code 500 and an error object 
-  *    {error: [String|Object]} or a response object of the created Appointment with status code 201
+  *    {error: [String|Object]} or a response object of the created Product with status code 201
   * */
-exports.createAppointment = async (req, res, next) => {
-  console.log('createAppointment');
+exports.createProducts = async (req, res, next) => {
+  console.log('createProducts');
   console.log(req.body)
   try{
-		const result = await Appointments.create({
+		const result = await Products.create({
       ...req.body,
 		})
 		return res.status(201).json(result)
 	}catch (error) {
-		return res.status(500).json({ error: error ? error : new Error('Error Creating Appointment') })
+		return res.status(500).json({ error: error ? error : new Error('Error Creating Product') })
 	}
 }
 
 /**
-  * Get A List of all Appointments
+  * Get A List of all Products
   * @param {*} req request object
   * @param {*} res response object
   * @returns {*} returns an error message with status code 500 and an error object 
-  *    {error: [String|Object]} or a response array of objects of the requested Appointments  with status code 200
+  *    {error: [String|Object]} or a response array of objects of the requested Products  with status code 200
   * */
-exports.getAllAppointments = async (req, res) => {
+exports.getAllProducts = async (req, res) => {
   try {
-    const appointments = await Appointments.findAll({order: [['createdAt', 'DESC']]});
-    return res.status(200).json(appointments);
+    const products = await Products.findAll({order: [['createdAt', 'DESC']]});
+    return res.status(200).json(products);
   } catch (error) {
 		return res.status(500).json({ error: error ? error : new Error('Could not get your data') })
   }
 }
 
 /**
-  * Get an Appointment.
+  * Get an Product.
   * @param {*} req request object
   * @param {*} res response object
   * @returns {*} returns an error message with status code 500 and an error object 
   *    {error: [String|Object]} or a response  object of the appointment requested  with status code 200
   * */
-exports.getAppointment = async (req, res) => {
+exports.getProduct = async (req, res) => {
   try {
-    const appointment = await Appointments.findOne({where: {id: req.params.id}});
+    const appointment = await Products.findOne({where: {id: req.params.id}});
     return res.status(200).json(appointment);
   } catch (error) {
 		return res.status(500).json({ error: error ? error : new Error('Could not get your data') })
@@ -55,16 +55,16 @@ exports.getAppointment = async (req, res) => {
 }
 
 /**
-  * Search through the Appointment Dataset
+  * Search through the Product Dataset
   * @param {*} req request object
   * @param {*} res response object
   * @returns {*} returns an error message with status code 500 and an error object 
   *    {error: [String|Object]} or a response  object of the appointment requested  with status code 200
   * */
-exports.searchInAppointments = async (req, res) => {
+exports.searchInProducts = async (req, res) => {
   try {
     const {name, phone, address, sex, age} = req.query;
-    const appointment = await Appointments.findAll({
+    const appointment = await Products.findAll({
       order: [['createdAt', 'DESC']],
       where:  {
       [Op.or]: [{
@@ -73,23 +73,23 @@ exports.searchInAppointments = async (req, res) => {
               }
           },
           {
-              phone: {
-                  [Op.like]: `%${phone}%`
+              description: {
+                  [Op.like]: `%${description}%`
               }
           },
           {
-              address: {
-                  [Op.like]: `%${address}%`
+              imageUrl: {
+                  [Op.like]: `%${imageUrl}%`
               }
           },
           {
-              sex: {
-                  [Op.like]: `%${sex}%`
+              amount: {
+                  [Op.like]: `%${amount}%`
               }
           },
           {
-              age: {
-                  [Op.like]: `%${age}%`
+              currency: {
+                  [Op.like]: `%${currency}%`
               }
           },
         ]
@@ -103,33 +103,33 @@ exports.searchInAppointments = async (req, res) => {
 }
 
 /**
-  * Delete an Appointment.
+  * Delete an Product.
   * @param {*} req request object
   * @param {*} res response object
   * @returns {*} returns an error message with status code 500 and an error object 
   *    {error: [String|Object]} or a response  object {message: String} with status code 204
   * */
-exports.deleteAppointment = async (req, res) => {
+exports.deleteProduct = async (req, res) => {
 	try{
-		await Appointments.destroy({where: {id: req.params.id}})
-		return res.status(204).json({message: 'Appointment Deleted Successfully'})
+		await Products.destroy({where: {id: req.params.id}})
+		return res.status(204).json({message: 'Product Deleted Successfully'})
 	}catch(error){
-		return res.status(500).json({error: error ? error : new Error('Error Deleting Appointment')})
+		return res.status(500).json({error: error ? error : new Error('Error Deleting Product')})
 	}
 }
 
 /**
-  * Edit an Appointment.
+  * Edit an Product.
   * @param {*} req request object
   * @param {*} res response object
   * @returns {*} returns an error message with status code 500 and an error object 
   *    {error: [String|Object]} or a response  object {message: String} with status code 200
   * */
-exports.editAppointment = async (req, res) => {
+exports.editProduct = async (req, res) => {
 	try{
-		await Appointments.update(req.body,{where: {id: req.params.id}})
-		return res.status(200).json({message: 'Appointment Updated Successfully'})
+		await Products.update(req.body,{where: {id: req.params.id}})
+		return res.status(200).json({message: 'Product Updated Successfully'})
 	}catch(error){
-		return res.status(500).json({error: error ? error : new Error('Error Updating Appointment')})
+		return res.status(500).json({error: error ? error : new Error('Error Updating Product')})
 	}
 }
