@@ -1,8 +1,6 @@
 const { ProductType } = require('./product.typeDef');
-const { GraphQLList, GraphQLNonNull, GraphQLInt, GraphQLString } = require("graphql");
+const { GraphQLList, GraphQLNonNull, GraphQLInt } = require("graphql");
 const dbConnect = require("../../models/index");
-const { getRandomImageURL, getRandomCurrencyCode } = require("../../helpers");
-const faker = require('faker');
 
 const getProduct = {
   type: ProductType,
@@ -35,44 +33,7 @@ const getAllProducts = {
   }
 }
 
-const createMultipleProducts = {
-  type: new GraphQLList(ProductType),
-  description: 'Create multiple products',
-  args: {
-    count: { type: GraphQLNonNull(GraphQLInt) },
-  },
-  resolve: async (parent, { count }) => {
-    try {
-      const products = [];
-
-      for (let i = 0; i < count; i++) {
-        const name = faker.commerce.productName();
-        const description = faker.commerce.productDescription();
-        const imageUrl = await getRandomImageURL();
-        const amount = faker.finance.amount();
-        const currency = getRandomCurrencyCode(); 
-        const product = await dbConnect.Product.create({
-          name,
-          description,
-          imageUrl,
-          amount,
-          currency
-        });
-
-        products.push(product);
-      }
-
-      return products;
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  },
-};
-
-
 module.exports = {
   getProduct,
   getAllProducts,
-  createMultipleProducts,
 }

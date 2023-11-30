@@ -1,28 +1,12 @@
-const axios = require('axios');
-
-const truncateImageUrl = (imageUrl) => {
-  if (imageUrl.length > 50) {
-    return imageUrl.substring(0, 50);
-  }
-  return imageUrl;
-};
 
 const getRandomImageURL = async () => {
   try {
-    const response = await axios.get('https://picsum.photos/300/300', {
-      responseType: 'arraybuffer',
-    });
-
-    const imageBuffer = Buffer.from(response.data, 'binary');
-    let imageURL = `data:${response.headers['content-type']};base64,${imageBuffer.toString('base64')}`;
-    console.log("The Image URL: " + imageURL);
-
-    imageURL = truncateImageUrl(imageURL); // Truncate the imageUrl if it exceeds the maximum length
-
-    return imageURL;
+    const response = await fetch('https://source.unsplash.com/random');
+    const imageUrl = response.url;
+    return imageUrl;
   } catch (error) {
-    console.error(error);
-    throw error;
+    console.error('Error fetching random image:', error);
+    return error;
   }
 };
 
