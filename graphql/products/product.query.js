@@ -21,10 +21,16 @@ const getProduct = {
 
 const getAllProducts = {
   type: new GraphQLList(ProductType),
-  description: "Get all products in the database",
-  resolve: async () => {
+  description: "Get all products in the database.",
+  args: {
+    page: { type: GraphQLInt },
+    limit: { type: GraphQLInt },
+  },
+  resolve: async (_parent, args) => {
     try {
-      const products = await dbConnect.Product.findAll();
+      const offset = args.page ? (args.page - 1) * (args.limit || 12) : 0;
+      const limit = args.limit || 12;
+      const products = await dbConnect.Product.findAll({offset, limit});
       return products;
     } catch (error) {
       console.error(error);
