@@ -1,7 +1,8 @@
-# DrNG - Patient's Appointments CMS #
+# Demo GraphQL backend #
 
-The aim of this project is to develop a Backend API services to interact with frontend website based on ReactJS, Redux and AntDesgin to interact.
-This demonstrates the ability to create API services for any  utilization.
+The aim of this project is to develop a Backend API services using nodejs, express, sequelize, and graphQL to interact with frontend web app. The objective is to fetch
+random product data to supply a MySQL database and make that accessible to the frontend.
+This demonstrates the ability to create API services using GraphQL for any  utilization.
 
 ### Installation ###
 Perform the following instructions:
@@ -9,9 +10,9 @@ npm install
 npm run start or npm run dev
 
 ### Website Links ###
-Link to the Website: https://appointment-scheduler-ruby.vercel.app/
+Link to the Website: https://demo-store-git-main-ngassajason-gmailcom.vercel.app/
 
-Link to the Code: https://github.com/clintjason/AppointSchedulerBackend.git
+Link to the Code: https://github.com/clintjason/DemoGraphQLbackend.git
 
 ### Website Preview
-![The Phone mockup of DrNG](https://github.com/clintjason/AppointmentScheduler/blob/main/src/assets/DrNg.png?raw=true)
+![A sample view of the web app](https://github.com/clintjason/DemoStore/blob/main/src/assets/images/demoFront.png?raw=true)
