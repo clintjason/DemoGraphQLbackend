@@ -1,7 +1,7 @@
 
 const getRandomImageURL = async () => {
   try {
-    const response = await fetch('https://source.unsplash.com/random');
+    const response = await fetch('https://source.unsplash.com/random/300x250');
     const imageUrl = response.url;
     return imageUrl;
   } catch (error) {
