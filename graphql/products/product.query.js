@@ -1,5 +1,5 @@
 const { ProductType } = require('./product.typeDef');
-const { GraphQLList, GraphQLNonNull, GraphQLInt } = require("graphql");
+const { GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLInt } = require("graphql");
 const dbConnect = require("../../models/index");
 
 const getProduct = {
@@ -20,7 +20,13 @@ const getProduct = {
 }
 
 const getAllProducts = {
-  type: new GraphQLList(ProductType),
+  type: new GraphQLObjectType({
+    name: 'ProductList',
+    fields: {
+      totalCount: { type: GraphQLInt },
+      products: { type: new GraphQLList(ProductType) }
+    }
+  }),
   description: "Get all products in the database.",
   args: {
     page: { type: GraphQLInt },
@@ -31,12 +37,13 @@ const getAllProducts = {
       const offset = args.page ? (args.page - 1) * (args.limit || 12) : 0;
       const limit = args.limit || 12;
       const products = await dbConnect.Product.findAll({offset, limit});
-      return products;
+      const totalCount = await dbConnect.Product.count();
+      return { totalCount, products };
     } catch (error) {
       console.error(error);
       throw error;
     }
-  }
+  },
 }
 
 module.exports = {
