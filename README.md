@@ -1,4 +1,4 @@
-# Demo GraphQL backend #
+# Demo GraphQL CRUD Server Backend #
 
 The aim of this project is to develop a Backend API services using nodejs, express, sequelize, and graphQL to interact with frontend web app. The objective is to fetch
 random product data to supply a MySQL database and make that accessible to the frontend.
